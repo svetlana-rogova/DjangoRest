@@ -22,10 +22,10 @@ class Payments(models.Model):
         ('cash', 'Cash'),
         ('translation', 'Translation'),
     ]
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='user')
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='payments')
     payment_date = models.DateTimeField(auto_now_add=True)
-    paid_course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='paid_course', null=True, blank=True)
-    paid_lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='paid_lesson', null=True, blank=True)
+    paid_course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='payments', null=True, blank=True)
+    paid_lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='payments', null=True, blank=True)
     payment_amount = models.IntegerField()
     payment_method = models.CharField(max_length=15, choices=STATUS_CHOICES, default='cash')
 
