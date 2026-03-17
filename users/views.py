@@ -1,6 +1,6 @@
 from rest_framework.generics import RetrieveUpdateAPIView, ListAPIView
 from users.models import CustomUser, Payments
-from users.serializers import UserSerializer, PaymentsSerializer
+from users.serializers import UserSerializer, PaymentsSerializer, UserPaymentsSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
@@ -9,7 +9,7 @@ from rest_framework.filters import OrderingFilter
 
 class UserEditView(RetrieveUpdateAPIView):
     queryset = CustomUser.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserPaymentsSerializer
     permission_classes = [IsAuthenticated]
 
 
