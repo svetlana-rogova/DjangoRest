@@ -1,0 +1,101 @@
+[
+{
+    "model": "users.customuser",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$92OQeb97PkU4JhzsrwD70j$tKolIO/ZY0liQYr8KpkTpuDOe1luLgaODcFdACFOsW8=",
+        "last_login": "2026-03-16T18:20:59.911Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-03-16T18:20:21.129Z",
+        "email": "mifistofiya@gmail.com",
+        "phone_number": null,
+        "avatar": "",
+        "country": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.customuser",
+    "pk": 2,
+    "fields": {
+        "password": "1234",
+        "last_login": "2026-03-16T18:39:49Z",
+        "is_superuser": false,
+        "username": "svetlana",
+        "first_name": "Александр",
+        "last_name": "Рогов",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-16T18:37:47Z",
+        "email": "mifistofiya1@gmail.com",
+        "phone_number": "8999222",
+        "avatar": "",
+        "country": "Россия",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.customuser",
+    "pk": 3,
+    "fields": {
+        "password": "1234",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "Example",
+        "first_name": "Example",
+        "last_name": "Example",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-03-16T18:40:47Z",
+        "email": "test@gmail.com",
+        "phone_number": null,
+        "avatar": "",
+        "country": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.payments",
+    "pk": 1,
+    "fields": {
+        "user": 3,
+        "payment_date": "2026-03-16T18:41:35.979Z",
+        "paid_course": 1,
+        "paid_lesson": null,
+        "payment_amount": 30000,
+        "payment_method": "translation"
+    }
+},
+{
+    "model": "users.payments",
+    "pk": 2,
+    "fields": {
+        "user": 2,
+        "payment_date": "2026-03-16T18:41:57.321Z",
+        "paid_course": null,
+        "paid_lesson": 4,
+        "payment_amount": 2000,
+        "payment_method": "cash"
+    }
+},
+{
+    "model": "users.payments",
+    "pk": 3,
+    "fields": {
+        "user": 3,
+        "payment_date": "2026-03-16T18:42:19.089Z",
+        "paid_course": 2,
+        "paid_lesson": null,
+        "payment_amount": 20000,
+        "payment_method": "translation"
+    }
+}
+]
