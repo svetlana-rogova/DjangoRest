@@ -1,4 +1,4 @@
-from rest_framework.generics import RetrieveUpdateAPIView, ListAPIView
+from rest_framework.generics import RetrieveUpdateAPIView, ListAPIView, DestroyAPIView, CreateAPIView, RetrieveAPIView
 from users.models import CustomUser, Payments
 from users.serializers import UserSerializer, PaymentsSerializer, UserPaymentsSerializer
 from rest_framework.permissions import IsAuthenticated
@@ -19,3 +19,25 @@ class PaymentsList(generics.ListAPIView):
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_fields = ['paid_course', 'paid_lesson', 'payment_method']
     ordering_fields = ['payment_date']
+
+
+class UserListView(ListAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class UserDetailView(RetrieveAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+class RegisterView(CreateAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+
+class UserDeleteView(DestroyAPIView):
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
