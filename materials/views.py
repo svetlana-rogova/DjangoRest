@@ -7,6 +7,9 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class CourseViewSet(viewsets.ModelViewSet):
+    """
+    Представление для работы с курсами (CRUD операции).
+    """
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
 
@@ -25,11 +28,17 @@ class CourseViewSet(viewsets.ModelViewSet):
 
 
 class LessonCreateAPIView(generics.CreateAPIView):
+    """
+    Представление для добавления урока
+    """
     serializer_class = LessonSerializer
     permission_classes = [IsAuthenticated, ~IsModerator]
 
 
 class LessonListAPIView(generics.ListAPIView):
+    """
+    Представление для просмотра уроков
+    """
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
     permission_classes = [IsModerator]
@@ -37,17 +46,26 @@ class LessonListAPIView(generics.ListAPIView):
 
 
 class LessonRetrieveAPIView(generics.RetrieveAPIView):
+    """
+    Представление для просмотра конкретного урока
+    """
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
     permission_classes = [IsModerator | IsOwner]
 
 
 class LessonUpdateAPIView(generics.UpdateAPIView):
+    """
+    Представление для изменения урока
+    """
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
     permission_classes = [IsModerator | IsOwner]
 
 
 class LessonDestroyAPIView(generics.DestroyAPIView):
+    """
+    Представление для удаления урока
+    """
     queryset = Lesson.objects.all()
     permission_classes = [IsOwner | ~IsModerator]
