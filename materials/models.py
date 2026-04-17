@@ -3,6 +3,9 @@ from django.db import models
 
 
 class Course(models.Model):
+    """
+    Модель курса
+    """
     title = models.CharField(max_length=150, verbose_name='Название')
     image = models.ImageField(upload_to='images/', verbose_name='Картинка', blank=True, null=True)
     description = models.TextField(verbose_name='Описание')
@@ -16,8 +19,10 @@ class Course(models.Model):
         verbose_name_plural = 'курсы'
 
 
-
 class Lesson(models.Model):
+    """
+    Модель урока
+    """
     title = models.CharField(max_length=150, verbose_name='Название')
     image = models.ImageField(upload_to='images/', verbose_name='Картинка', blank=True, null=True)
     description = models.TextField(verbose_name='Описание')
