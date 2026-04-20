@@ -5,6 +5,9 @@ from materials.models import Course, Lesson
 
 
 class CustomUser(AbstractUser):
+    """
+    Модель пользователя
+    """
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
@@ -18,6 +21,9 @@ class CustomUser(AbstractUser):
 
 
 class Payments(models.Model):
+    """
+    Модель платежа
+    """
     STATUS_CHOICES = [
         ('cash', 'Cash'),
         ('translation', 'Translation'),
