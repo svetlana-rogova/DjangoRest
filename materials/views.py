@@ -1,4 +1,5 @@
 from materials.models import Course, Lesson, Subscription
+from materials.paginators import MaterialsPagination
 from materials.permissions import IsModerator, IsOwner
 from materials.serializers import LessonSerializer, CourseSerializer
 from rest_framework import viewsets
@@ -13,8 +14,10 @@ class CourseViewSet(viewsets.ModelViewSet):
     """
     Представление для работы с курсами (CRUD операции).
     """
+    pagination_class = MaterialsPagination
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
+
 
     def get_permissions(self):
         if self.action == 'create':
@@ -45,6 +48,7 @@ class LessonListAPIView(generics.ListAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
     permission_classes = [IsModerator]
+    pagination_class = MaterialsPagination
 
 
 
