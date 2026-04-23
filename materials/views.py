@@ -24,7 +24,7 @@ class CourseViewSet(viewsets.ModelViewSet):
             self.permission_classes = [IsAuthenticated, ~IsModerator]
         elif self.action == 'list':
             self.permission_classes = [IsModerator]
-        elif self.action == 'delete':
+        elif self.action == 'destroy':
             self.permission_classes = [IsOwner | ~IsModerator]
         elif self.action == 'update':
             self.permission_classes = [IsModerator | IsOwner]
@@ -99,4 +99,3 @@ class SubscriptionAPIView(APIView):
             message = 'подписка добавлена'
             # Возвращаем ответ в API
         return Response({"message": message})
-
