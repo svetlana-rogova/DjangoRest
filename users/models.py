@@ -34,6 +34,10 @@ class Payments(models.Model):
     paid_lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='payments', null=True, blank=True)
     payment_amount = models.IntegerField()
     payment_method = models.CharField(max_length=15, choices=STATUS_CHOICES, default='cash')
+    session_id = models.CharField(max_length=500, null=True, blank=True)
+    payment_url = models.TextField(null=True, blank=True)
+
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='created')
 
     def __str__(self):
         return f'Оплата прошла от пользователя: {self.user}, сумма: {self.payment_amount}'
