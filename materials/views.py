@@ -13,6 +13,7 @@ from django.conf import settings
 from users.models import Payments
 from .services import  create_session, create_price, create_product
 from rest_framework import status
+from materials.tasks import send_mail_user
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -23,6 +24,10 @@ class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
 
+    def perform_update(self, serializer):
+        serializer.save()
+        course = serializer.instance
+        send_mail_user.delay(course.id)
 
     def get_permissions(self):
         if self.action == 'create':
