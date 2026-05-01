@@ -24,10 +24,6 @@ class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
 
-    def perform_update(self, serializer):
-        serializer.save()
-        course = serializer.instance
-        send_mail_user.delay(course.id)
 
     def get_permissions(self):
         if self.action == 'create':
@@ -78,6 +74,11 @@ class LessonUpdateAPIView(generics.UpdateAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
     permission_classes = [IsModerator | IsOwner]
+
+    def perform_update(self, serializer):
+        serializer.save()
+        lesson = serializer.instance
+        send_mail_user.delay(lesson.course)
 
 
 class LessonDestroyAPIView(generics.DestroyAPIView):
