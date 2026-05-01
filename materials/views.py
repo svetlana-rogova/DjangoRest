@@ -13,6 +13,7 @@ from django.conf import settings
 from users.models import Payments
 from .services import  create_session, create_price, create_product
 from rest_framework import status
+from materials.tasks import send_mail_user
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -73,6 +74,11 @@ class LessonUpdateAPIView(generics.UpdateAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
     permission_classes = [IsModerator | IsOwner]
+
+    def perform_update(self, serializer):
+        serializer.save()
+        lesson = serializer.instance
+        send_mail_user.delay(lesson.course)
 
 
 class LessonDestroyAPIView(generics.DestroyAPIView):

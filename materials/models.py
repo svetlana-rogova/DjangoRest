@@ -11,6 +11,7 @@ class Course(models.Model):
     description = models.TextField(verbose_name='Описание')
     owner = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='course', null=True, blank=True)
     price = models.IntegerField(default=0)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f'{self.title}'
