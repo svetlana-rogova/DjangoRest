@@ -20,7 +20,7 @@ class CourseViewSet(viewsets.ModelViewSet):
     Представление для работы с курсами (CRUD операции).
     """
     pagination_class = MaterialsPagination
-    queryset = Course.objects.all()
+    queryset = Course.objects.all().order_by('id')
     serializer_class = CourseSerializer
 
     def get_permissions(self):
@@ -50,7 +50,7 @@ class LessonListAPIView(generics.ListAPIView):
     Представление для просмотра уроков
     """
     serializer_class = LessonSerializer
-    queryset = Lesson.objects.all()
+    queryset = Lesson.objects.all().order_by('id')
     permission_classes = [IsModerator]
     pagination_class = MaterialsPagination
 
@@ -75,7 +75,7 @@ class LessonUpdateAPIView(generics.UpdateAPIView):
     def perform_update(self, serializer):
         serializer.save()
         lesson = serializer.instance
-        send_mail_user.delay(lesson.course)
+        send_mail_user.delay(lesson.course.id)
 
 
 class LessonDestroyAPIView(generics.DestroyAPIView):
