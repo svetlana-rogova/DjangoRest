@@ -48,6 +48,7 @@ class UserDetailView(RetrieveAPIView):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
 
+
 class RegisterView(CreateAPIView):
     """
         Представление для регистрации.

@@ -28,7 +28,6 @@ class CourseSerializer(serializers.ModelSerializer):
             return False
         return Subscription.objects.filter(owner=request.user, course=obj).exists()
 
-
     def get_count_lesson(self, obj):
         return obj.lessons.count()
 

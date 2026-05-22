@@ -1,4 +1,4 @@
-from rest_framework.serializers import  ValidationError
+from rest_framework.serializers import ValidationError
 
 
 def validate_link(value):

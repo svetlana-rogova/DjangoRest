@@ -6,7 +6,6 @@ from materials.models import Course, Lesson, Subscription
 from django.contrib.auth.models import Group
 
 
-
 class MaterialsTestCase(APITestCase):
 
     def setUp(self) -> None:
@@ -18,7 +17,7 @@ class MaterialsTestCase(APITestCase):
         self.user = CustomUser.objects.create_user(username='test', email='user@test.com', password='1234')
         self.user.groups.add(self.group)
 
-        self.other_user = CustomUser.objects.create_user(username='test2',email='other@test.com', password='1234')
+        self.other_user = CustomUser.objects.create_user(username='test2', email='other@test.com', password='1234')
 
         self.owner_user = CustomUser.objects.create_user(username='test3', email='owner@test.com', password='1234')
 

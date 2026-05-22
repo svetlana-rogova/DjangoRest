@@ -35,5 +35,4 @@ def filter_user():
     Задача, которая снимает активацию пользователя если он не заходил более месяца
     """
     limit = timezone.now() - timedelta(days=30)
-    CustomUser.objects.filter(last_login__lt=limit).update(is_active = False)
-
+    CustomUser.objects.filter(last_login__lt=limit).update(is_active=False)
