@@ -56,6 +56,24 @@ python manage.py test
 coverage report
 ```
 
+## Deployment
+
+Проект развёрнут на Ubuntu Server.
+
+Используются:
+- Nginx
+- Gunicorn
+- PostgreSQL
+
+## CI/CD
+
+GitHub Actions pipeline включает:
+
+- линт 
+- тесты
+- сборку Docker image 
+- деплой на сервер после успешного push и pull_request
+
 ## Технологии:
 - Python 3.13
 - Django

@@ -9,9 +9,8 @@ from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 import stripe
-from django.conf import settings
 from users.models import Payments
-from .services import  create_session, create_price, create_product
+from .services import create_session, create_price, create_product
 from rest_framework import status
 from materials.tasks import send_mail_user
 
@@ -21,9 +20,8 @@ class CourseViewSet(viewsets.ModelViewSet):
     Представление для работы с курсами (CRUD операции).
     """
     pagination_class = MaterialsPagination
-    queryset = Course.objects.all()
+    queryset = Course.objects.all().order_by('id')
     serializer_class = CourseSerializer
-
 
     def get_permissions(self):
         if self.action == 'create':
@@ -52,10 +50,9 @@ class LessonListAPIView(generics.ListAPIView):
     Представление для просмотра уроков
     """
     serializer_class = LessonSerializer
-    queryset = Lesson.objects.all()
+    queryset = Lesson.objects.all().order_by('id')
     permission_classes = [IsModerator]
     pagination_class = MaterialsPagination
-
 
 
 class LessonRetrieveAPIView(generics.RetrieveAPIView):
@@ -78,7 +75,7 @@ class LessonUpdateAPIView(generics.UpdateAPIView):
     def perform_update(self, serializer):
         serializer.save()
         lesson = serializer.instance
-        send_mail_user.delay(lesson.course)
+        send_mail_user.delay(lesson.course.id)
 
 
 class LessonDestroyAPIView(generics.DestroyAPIView):
@@ -100,7 +97,7 @@ class SubscriptionAPIView(APIView):
 
         subs_item = Subscription.objects.filter(owner=user, course=course_item)
 
-            # Если подписка у пользователя на этот курс есть - удаляем ее
+        # Если подписка у пользователя на этот курс есть - удаляем ее
         if subs_item.exists():
             subs_item.delete()
             message = 'подписка удалена'
